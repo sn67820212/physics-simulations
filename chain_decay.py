@@ -19,7 +19,7 @@ n_Tl_points = []
 n_Pb_points = []
 n_Bi_209_points = []
 
-#to assign decay probability for each atom
+#to assign decay probability for each atom for each timestep
 p_Bi = 1 - 2 ** (-1/tau_Bi_213)
 p_Tl = 1 - 2 ** (-1/tau_Tl)
 p_Pb = 1 - 2 ** (-1/tau_Pb)
