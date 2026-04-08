@@ -1,0 +1,48 @@
+"""consider a 2d  grid box with length L = 100 units, position of atom is
+represented by (x,y) and the particle is at (50,50) when t = 0. each unit 
+of time particle can move 1 step in either direction along x-axis and y-
+axis. The probability of taking each step is equally likely and completely 
+probabilistic. The only constraint is that particle cannot go outside the
+box i.e. it has limited options when it is in the rim or corners."""
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+#Define the parameters
+L = 101 #length of the box
+x_list = []
+y_list = []
+dxdy = [(-1,0),(1,0),(0,-1),(0,1)] #left,right, up, down
+
+#Define the random walk
+def random_walk(n):#n is the number of steps
+    x = y = 50 # Initial position
+    for i in range(n):
+        x_list.append(x)
+        y_list.append(y)
+        step = dxdy[np.random.randint(0,4)]
+        #Check if the particle is out of the box
+        if x+step[0] < 0 or x+step[0] > L-1 or y+step[1] < 0 or y+step[1] > L-1:
+            while x+step[0] < 0 and x+step[0] > L-1 and y+step[1] < 0 and y+step[1] > L-1:
+                step = dxdy[np.random.randint(0,4)]
+                x = x + step[0]
+                y = y + step[1]           
+        else:
+            x = x + step[0]
+            y = y + step[1]
+    return x_list, y_list
+
+#Simulation of 1000 steps
+x_list, y_list = random_walk(100000)
+
+#Plot the trajectory
+plt.plot(x_list[0],y_list[0], label = "first point",marker = 'o',color = 'red')
+plt.plot(x_list[0:33000],y_list[0:33000], label = "first 33000 points")
+plt.plot(x_list[33000:66000],y_list[33000:66000], label = "upto 66000 points")
+plt.plot(x_list[66000:100000],y_list[66000:100000], label = "upto 100000 points")
+plt.plot(x_list[-1],y_list[-1], label = "last point",marker = 'o',color = 'green')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Random walk')
+plt.legend()
+plt.show()
