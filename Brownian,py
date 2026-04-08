@@ -23,7 +23,7 @@ def random_walk(n):#n is the number of steps
         step = dxdy[np.random.randint(0,4)]
         #Check if the particle is out of the box
         if x+step[0] < 0 or x+step[0] > L-1 or y+step[1] < 0 or y+step[1] > L-1:
-            while x+step[0] < 0 and x+step[0] > L-1 and y+step[1] < 0 and y+step[1] > L-1:
+            while x+step[0] < 0 or x+step[0] > L-1 or y+step[1] < 0 or y+step[1] > L-1:
                 step = dxdy[np.random.randint(0,4)]
                 x = x + step[0]
                 y = y + step[1]           
