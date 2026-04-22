@@ -16,7 +16,7 @@ def bessel_function(n, x):
         s += 4*f(a + (2*i - 1)*h)
     for i in range(1,k+1):
         s += 2*f(a + 2*i*h)
-    return h*s/3
+    return h/np.pi*s/3
 x = np.linspace(0, 20,1000)
 J0 = [bessel_function(0, xi) for xi in x]
 J1 = [bessel_function(1, xi) for xi in x]
